@@ -2,12 +2,10 @@ import { IconButton, Box, Drawer, MenuItem, Divider } from '@mui/material'
 
 import { ExplanationButton, GitHubButton, HomeButton, TempButton } from './buttons'
 
-
 import {
   Menu as MenuIcon,
   CloseRounded as CloseRoundedIcon,
 } from '@mui/icons-material';
-
 
 import PropTypes from 'prop-types'
 

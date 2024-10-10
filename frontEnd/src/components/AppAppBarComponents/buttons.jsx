@@ -17,7 +17,7 @@ export const TempButton = (props) => {
 
 export const GitHubButton = (props) => {
   const handleRedirect = () => {
-    window.open('https://github.com/Tree-Ro/', '_blank')
+    window.open('https://github.com/Tree-Ro/amq-dl-util/', '_blank')
   }
 
   return (
