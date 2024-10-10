@@ -6,7 +6,6 @@ import { ExplanationButton, GitHubButton, HomeButton, TempButton } from './butto
 import {
   Menu as MenuIcon,
   CloseRounded as CloseRoundedIcon,
-  GitHub as GitHubIcon,
 } from '@mui/icons-material';
 
 
