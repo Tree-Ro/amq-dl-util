@@ -3,7 +3,7 @@ import { styled, alpha } from '@mui/material/styles';
 
 import { AppBar, Toolbar, Container } from '@mui/material';
 
-import { InfoButtons, InfoButtonsDrawer, NavButtons } from './AppAppBarComponents';
+import { InfoButtons, InfoButtonsDrawer, NavButtons, Logo } from './AppAppBarComponents';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -14,9 +14,9 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   backdropFilter: 'blur(24px)',
   border: '1px solid',
   borderColor: theme.palette.divider,
-  backgroundColor: alpha(theme.palette.background.default, 0.4),
-  boxShadow: theme.shadows[1],
-  padding: '8px 12px',
+  backgroundColor: alpha(theme.palette.background.paper, 0.4),
+  boxShadow: '4px 2px 2px black',
+  padding: '16px 8px',
 }));
 
 export default function AppAppBar() {
@@ -31,7 +31,9 @@ export default function AppAppBar() {
       position="fixed"
       sx={{ boxShadow: 0, bgcolor: 'transparent', backgroundImage: 'none', mt: 5 }}>
       <Container maxWidth="lg">
-        <StyledToolbar variant="dense" disableGutters>
+        <StyledToolbar variant="dense">
+
+          <Logo />
 
           <NavButtons />
 
