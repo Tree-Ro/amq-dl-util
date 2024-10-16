@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import formatData from '../utils/formatDataToAnisongDB';
+import fetch50RandomSongs from '../utils/fetch50randomSongs';
 
 const defaultValues = {
   anime_filter: '',
@@ -11,25 +13,64 @@ const defaultValues = {
   opening_filter: true,
   ending_filter: true,
   insert_filter: true,
-  arrangement_filter: '',
-  arrangement_filter_partial: true,
+  composer_filter: '',
+  composer_filter_partial: true,
 };
 
 const useForm = () => {
   const [values, setValues] = useState(defaultValues);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [results, setResults] = useState([]);
 
+  useEffect(() => {
+    const fetchInitialResults = async () => {
+      try {
+        const data = await fetch50RandomSongs();  
+        setResults(data);
+      } catch (err) {
+        setError('Failed to fetch initial results:', err);
+      }
+    };
 
-  // Helper function to update values
+    fetchInitialResults();
+  }, []);
+
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
     setValues(prevValues => ({
       ...prevValues,
       [name]: type === 'checkbox' ? checked : value,
     }));
-    console.log(values)
   };
 
-  return { values, handleChange };
+  const searchApi = async () => {
+    const query = formatData(values);
+
+    const payload = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(query),
+    };
+    const url = 'https://anisongdb.com/api/search_request';
+
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(url, payload);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+      setResults(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { values, handleChange, searchApi, loading, error, results };
 };
 
 export default useForm;

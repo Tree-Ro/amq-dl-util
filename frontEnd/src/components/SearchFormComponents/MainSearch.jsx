@@ -1,9 +1,9 @@
 import { FormGroup, FormControlLabel, Checkbox, TextField, Grid2 as Grid } from '@mui/material';
 import { useContext } from 'react';
-import formContext from '../../context/formContext';
+import { ValuesContext } from '../../context/formContext';
 
 const MainSearch = () => {
-  const { values, handleChange } = useContext(formContext)
+  const { values, handleChange } = useContext(ValuesContext)
 
 
   return (

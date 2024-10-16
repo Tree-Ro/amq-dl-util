@@ -1,19 +1,35 @@
 import useForm from '../hooks/useForm';
-import formContext from './formContext';
-import PropTypes from 'prop-types';
+import { ValuesContext, ResultsContext } from './formContext';
 
-const FormProvider = ({ children }) => {
-  const { values, handleChange } = useForm();
+import PropTypes from 'prop-types'
 
+const { values, handleChange, searchApi, loading, error, results } = useForm();
+
+const ResultsProvider = ({ children }) => {
   return (
-    <formContext.Provider value={{ values, handleChange }}>
+    <ResultsContext.Provider value={{ results }}>
       {children}
-    </formContext.Provider>
+    </ResultsContext.Provider>
   );
 };
 
-FormProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+ResultsProvider.propTypes = {
+  children: PropTypes.node.isRequired
+}
 
-export default FormProvider;
+
+const ValuesProvider = ({ children }) => {
+  return (
+    <ValuesContext.Provider value={{ values, handleChange, searchApi, loading, error }}>
+      {children}
+    </ValuesContext.Provider>
+  )
+}
+
+ValuesProvider.propTypes = {
+  children: PropTypes.node.isRequired
+}
+
+
+
+export { ResultsProvider, ValuesProvider };

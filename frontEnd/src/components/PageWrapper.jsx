@@ -19,13 +19,13 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const PageWrapper = ({ children }) => {
   return (
-    <Container maxWidth={''}>
+    <Container maxWidth={'true'}>
       <Box sx={{ flexGrow: 1, marginTop: 17 }}>
-        <Grid container spacing={2} direction={{ xs: 'column-reverse', md: 'row' }}>
+        <Grid container spacing={2} direction={{ md: 'row', xs: 'column-reverse' }}>
           <Grid size={{ xs: 12, md: 9 }}>
             <Item>{children[0]}</Item>
           </Grid>
-          <Grid size={{ xs: 12, md: 3 }}>
+          <Grid size={{ xs: 12, md: 3 }} position={{ md: 'fixed' }} right={{ xs: 12 }} >
             <Item>{children[1]}</Item>
           </Grid>
         </Grid>

@@ -1,7 +1,5 @@
-import { MainSearch, AdvancedSearch, EnableOptionsIcon } from './SearchFormComponents';
+import { MainSearch, AdvancedSearch, EnableOptionsIcon, SearchButton } from './SearchFormComponents';
 import { useState } from 'react';
-
-
 
 const SearchForm = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,6 +13,7 @@ const SearchForm = () => {
       <EnableOptionsIcon clickHandler={handleClick} />
       <MainSearch />
       {isOpen && <AdvancedSearch />}
+      <SearchButton />
     </>
   );
 };

@@ -1,5 +1,7 @@
 import { createContext } from 'react';
 
-const formContext = createContext();
+const ValuesContext = createContext();
+const ResultsContext = createContext();
 
-export default formContext;
+
+export { ValuesContext, ResultsContext};

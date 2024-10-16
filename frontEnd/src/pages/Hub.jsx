@@ -1,7 +1,8 @@
 import SearchForm from '../components/SearchForm'
 import PageWrapper from '../components/PageWrapper'
+import TableDisplay from '../components/TableDisplay'
 
-import FormProvider from '../context/FormProvider'
+import { ValuesProvider, ResultsProvider } from '../context/FormProvider'
 
 
 
@@ -9,11 +10,13 @@ const Hub = () => {
 
   return (
     <PageWrapper>
-      <h2>Search results go here [WIP]</h2>
-      <FormProvider>
+      <ResultsProvider>
+        <TableDisplay />
+      </ResultsProvider>
+      <ValuesProvider>
         <SearchForm />
-      </FormProvider>
-    </PageWrapper>
+      </ValuesProvider>
+    </PageWrapper >
   )
 }
 
