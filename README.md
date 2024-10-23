@@ -14,6 +14,7 @@ An SPA for downloading songs from AnisongDB/Amq, featuring a React Material-UI f
 
 - Cover Art integration by scraping.
 - Progress bar for downloads.
+- Add persitence to pagination settings of data table beyond sessions.
 - Redesign of the search form.
 - Integrate a media player.
 - Code splitting if necessary.

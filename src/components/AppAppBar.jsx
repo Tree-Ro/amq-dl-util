@@ -29,7 +29,7 @@ export default function AppAppBar() {
   return (
     <AppBar
       position="absolute"
-      sx={{ boxShadow: 0, bgcolor: 'transparent', backgroundImage: 'none', mt: 5 }}>
+      sx={{ boxShadow: 0, bgcolor: 'transparent', backgroundImage: 'none', mt: 3 }}>
       <Container maxWidth="lg">
         <StyledToolbar variant="dense">
 

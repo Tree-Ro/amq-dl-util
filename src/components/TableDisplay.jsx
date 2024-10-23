@@ -9,8 +9,9 @@ import downloadManySongs from '../utils/downloadUtil/downloadManySongs';
 
 export default function DataTable({ rows, loading, error }) {
   const [columnVisibilityModel, updateColumnVisibilityModel] = useColumnVisibility(columns, {
-    songLength: false,
+    annId: false,
     songArranger: false,
+    songLength: false,
   });
 
   const [selectedRows, setSelectedRows] = useState([]);
