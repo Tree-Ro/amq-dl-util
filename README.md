@@ -2,7 +2,7 @@
 
 ⚠️ **Work In Progress**: Currently under development.
 
-A full-stack application for downloading songs from AnisongDB/Amq, featuring a React Material-UI front-end.
+An SPA for downloading songs from AnisongDB/Amq, featuring a React Material-UI front-end.
 
 ## Features
 
@@ -10,7 +10,7 @@ A full-stack application for downloading songs from AnisongDB/Amq, featuring a R
   - Modern UI with React and Material-UI (MUI).
   - Download management interface via external API.
 
-## Features I'm Considering
+## Possible future features?
 
 - Cover Art integration by scraping.
 - Progress bar for downloads.
@@ -38,7 +38,7 @@ A full-stack application for downloading songs from AnisongDB/Amq, featuring a R
 
 2. Install dependencies:
     ```bash
-    cd frontend && npm install
+    npm install
     ```
 
 ## Usage (WIP)
