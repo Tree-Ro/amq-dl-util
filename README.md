@@ -10,7 +10,7 @@ An SPA for downloading songs from AnisongDB/Amq, featuring a React Material-UI f
   - Modern UI with React and Material-UI (MUI).
   - Download management interface via external API.
 
-## Possible future features?
+## Possible future additions?
 
 - Cover Art integration by scraping.
 - Progress bar for downloads.
