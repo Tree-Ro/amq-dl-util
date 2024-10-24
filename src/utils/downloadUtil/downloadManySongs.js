@@ -4,8 +4,11 @@ import addID3Tags from './addID3Tags';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
-const downloadManySongs = async (rows) => {
+const downloadManySongs = async (rows, updateProgress) => {
   const zip = new JSZip();
+
+  let index = 0
+  const failedDownloads = []
 
   for (const row of rows) {
     const path = row.audio;
@@ -13,6 +16,7 @@ const downloadManySongs = async (rows) => {
       title: row.songName,
       artist: row.songArtist,
       album: row.animeENName,
+      albumJP: row.animeJPName,
       composer: row.songComposer,
     };
 
@@ -24,6 +28,13 @@ const downloadManySongs = async (rows) => {
       zip.file(`${tags.album} - ${tags.title}.mp3`, taggedBlob);
     } catch (e) {
       console.error('Error processing/fetching the song: ', e);
+      failedDownloads.push(row)
+    } finally {
+      if (updateProgress) {
+        index++
+        const percentageDone = (index / rows.length) * 100
+        updateProgress(percentageDone)
+      }
     }
   }
 
@@ -31,6 +42,8 @@ const downloadManySongs = async (rows) => {
   zip.generateAsync({ type: 'blob' }).then((content) => {
     saveAs(content, 'songs.zip');
   });
+
+  return failedDownloads
 };
 
 export default downloadManySongs;

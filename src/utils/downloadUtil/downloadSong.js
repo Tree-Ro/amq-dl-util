@@ -11,6 +11,7 @@ const downloadSong = async (row) => {
     title: row.songName,
     artist: row.songArtist,
     album: row.animeENName,
+    albumJP: row.animeJPName,
     composer: row.songComposer,
   }
 
@@ -20,9 +21,10 @@ const downloadSong = async (row) => {
     const taggedBlob = await addID3Tags(cleanBlob, tags)
 
     saveAs(taggedBlob, `${tags.album} - ${tags.title}.mp3`)
-    
+    return true
   } catch(e) {
     console.error('Error processing/fetching the song: ', e)
+    return false
   }
 
 }
