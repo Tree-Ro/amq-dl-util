@@ -1,6 +1,6 @@
 import { Button, Tooltip, } from '@mui/material'
 import { Download as DownloadIcon } from '@mui/icons-material'
-import downloadSong from '../../utils/downloadUtil/downloadSong'
+import downloadSongs from '../../utils/downloadUtil/downloadSongs'
 
 import PropTypes from 'prop-types'
 import AlertSnackbar from './AlertSnackbar'
@@ -11,7 +11,7 @@ export const DownloadButton = ({ row }) => {
 
   const onClick = async () => {
     openSnackbar(`Downloading: ${row.songName}...`, 'info')
-    const isSuccess = await downloadSong(row)
+    const isSuccess = await downloadSongs(row)
 
     isSuccess ?
       openSnackbar(`Success!`, 'success') :

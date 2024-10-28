@@ -7,7 +7,7 @@ import { columns } from './TableDisplayComponents/dataTableColumns';
 import AlertSnackbar from './TableDisplayComponents/AlertSnackbar';
 import useAlertSnackbar from '../hooks/useAlertSnackbar';
 import { useColumnVisibility } from '../hooks/useColumnVisibility';
-import downloadManySongs from '../utils/downloadUtil/downloadManySongs';
+import downloadSongs from '../utils/downloadUtil/downloadSongs';
 
 export default function DataTable({ rows, loading, error }) {
   const [columnVisibilityModel, updateColumnVisibilityModel] = useColumnVisibility(columns, {
@@ -25,7 +25,7 @@ export default function DataTable({ rows, loading, error }) {
   const onDownloadClick = async () => {
     openSnackbar('Downloading selected songs...', 'info');
     setRowSelectionModel([]); // Clear selection model 
-    const failedDownloads = await downloadManySongs(selectedRows, updateProgress);
+    const failedDownloads = await downloadSongs(selectedRows, updateProgress);
     setSelectedRows([]); // Clear selected rows
     updateProgress(null); // Reset progress after download
 

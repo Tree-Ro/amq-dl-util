@@ -1,4 +1,4 @@
-const filterCoverArtByTags = (tags, data) => {
+const filterItunesByRelevance = (tags, data) => {
   const { title, artist, album, albumJP } = tags;
 
   // Regex patterns
@@ -19,13 +19,13 @@ const filterCoverArtByTags = (tags, data) => {
     regexArtist: regexPartialArtist,
     regexAlbum: regexPartialAlbum,
   };
-
-  let foundResults = [...filteredResults];
   let strictFlags = {
     strictTitle: false,
     strictArtist: false,
     strictAlbum: false,
   };
+
+  let foundResults = [...filteredResults];
 
   // Maximum iterations
   let iterations = 0;
@@ -67,7 +67,7 @@ const filterCoverArtByTags = (tags, data) => {
     //If we have a definitive match, return it
     if (finalIntersection.size === 1) {
       return [...finalIntersection][0];
-    } else if (finalIntersection.size === 0) {
+    } else {
       const unionSet = new Set([
         ...titleArtistIntersection,
         ...titleAlbumIntersection,
@@ -81,7 +81,7 @@ const filterCoverArtByTags = (tags, data) => {
       }
 
       // New iteration with union of this iterations intersections
-      foundResults = [...unionSet];
+      foundResults = finalIntersection.size > 0 ? [...finalIntersection] : [...unionSet]
 
       // Increase strictness
       if (!strictFlags.strictTitle) {
@@ -112,11 +112,12 @@ const filterCoverArtByTags = (tags, data) => {
         console.log('All strict matches applied, returning first exact match or top result');
         return finalIntersection[0] || foundResults[0];
       }
-    } else if (finalIntersection > 1) {
-      foundResults = [...finalIntersection]
     }
   }
 
   console.log('Reached max iterations, likely caused an infinite loop, returning null');
   return null;
 };
+
+
+export default filterItunesByRelevance
