@@ -7,15 +7,15 @@ import AlertSnackbar from './AlertSnackbar'
 import useAlertSnackbar from '../../hooks/useAlertSnackbar'
 
 export const DownloadButton = ({ row }) => {
-  const { snackbar, openSnackbar, closeSnackbar } = useAlertSnackbar()
+  const { snackbar, openSnackbar, closeSnackbar, updateProgress } = useAlertSnackbar()
 
   const onClick = async () => {
     openSnackbar(`Downloading: ${row.songName}...`, 'info')
-    const isSuccess = await downloadSongs(row)
+    const failedDownloads = await downloadSongs(row, updateProgress)
 
-    isSuccess ?
-      openSnackbar(`Success!`, 'success') :
-      openSnackbar(`Something went wrong`, 'warning')
+    !failedDownloads.length ?
+      openSnackbar(`Download complete!`, 'success') :
+      openSnackbar(`Failed to download: ${row.songName}`, 'warning')
   }
 
   const isAvailable = !row.audio

@@ -1,11 +1,10 @@
 import { Alert, Snackbar, LinearProgress } from '@mui/material';
 import ReactDOM from 'react-dom';
 
-const AlertSnackbar = ({ text, severity = 'info', autoHideDuration = 6000, progress = null, open, onClose }) => {
+const AlertSnackbar = ({ text, severity = 'info', progress = null, open, onClose }) => {
   return ReactDOM.createPortal(
     <Snackbar
       open={open}
-      autoHideDuration={autoHideDuration}
       onClose={onClose}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
     >
