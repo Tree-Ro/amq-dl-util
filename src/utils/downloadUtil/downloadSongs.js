@@ -8,22 +8,22 @@ const downloadSongs = async (rows, updateProgress) => {
   const songs = Array.isArray(rows) ? rows : [rows];
   const zip = songs.length > 1 ? new JSZip() : null;
   const failedDownloads = [];
-  
+
   for (let index = 0; index < songs.length; index++) {
-    const { 
-      audio: path, 
-      songName, 
-      songArtist, 
-      animeENName, 
-      animeJPName, 
-      songComposer 
+    const {
+      audio: path,
+      songName,
+      songArtist,
+      animeENName,
+      animeJPName,
+      songComposer
     } = songs[index];
-    const tags = { 
-      title: songName, 
-      artist: songArtist, 
-      album: animeENName, 
-      albumJP: animeJPName, 
-      composer: songComposer 
+    const tags = {
+      title: songName,
+      artist: songArtist,
+      album: animeENName,
+      albumJP: animeJPName,
+      composer: songComposer
     };
 
     try {
@@ -35,9 +35,12 @@ const downloadSongs = async (rows, updateProgress) => {
 
       const taggedBlob = await addID3Tags(cleanBlob, tags);
       if (taggedBlob && updateProgress) updateProgress(((index + 1) / songs.length) * 100)
-      
-      const fileName = `${tags.album} - ${tags.title}.mp3`;
-      
+
+      const slashRegex = /\//g
+      const escapedAlbumName = tags.album.replace(slashRegex, '_')
+      const escapedTitleName = tags.title.replace(slashRegex, '_')
+      const fileName = `${escapedAlbumName} - ${escapedTitleName}.mp3`;
+
       zip ? zip.file(fileName, taggedBlob) : saveAs(taggedBlob, fileName);
     } catch (e) {
       console.error('Error processing/fetching the song:', e);

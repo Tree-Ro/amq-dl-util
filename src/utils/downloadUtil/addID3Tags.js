@@ -8,9 +8,13 @@ const addID3Tags = (blob, tags, imageBlob) => {
       const arrayBuffer = event.target.result;
       const writer = new ID3Writer(new Uint8Array(arrayBuffer));
 
+      // If tags.artist contains '/' replace it
+      const slashRegex = /\//g
+      const escapedArtist = tags.artist.replace(slashRegex, '\\')
+
       // Set text frames (title, artist, album, composer)
       writer.setFrame('TIT2', tags.title)
-        .setFrame('TPE1', [tags.artist])
+        .setFrame('TPE1', [escapedArtist])
         .setFrame('TALB', tags.album)
         .setFrame('TCOM', [tags.composer]);
 
@@ -21,7 +25,7 @@ const addID3Tags = (blob, tags, imageBlob) => {
           type: 3,                    // Cover (front)
           data: new Uint8Array(imageArrayBuffer), // Convert to Uint8Array
           description: 'Cover Art',
-          useUnicodeEncoding: false, 
+          useUnicodeEncoding: false,
         });
       }
 
