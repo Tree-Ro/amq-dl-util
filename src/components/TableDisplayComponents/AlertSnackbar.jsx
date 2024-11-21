@@ -7,6 +7,7 @@ const AlertSnackbar = ({ text, severity = 'info', progress = null, open, onClose
       open={open}
       onClose={onClose}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      ClickAwayListenerProps={{ onClickAway: () => null }}
     >
       <Alert
         onClose={onClose}

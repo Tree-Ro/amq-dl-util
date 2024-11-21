@@ -39,7 +39,14 @@ const downloadSongs = async (rows, updateProgress) => {
       const slashRegex = /\//g
       const escapedAlbumName = tags.album.replace(slashRegex, '_')
       const escapedTitleName = tags.title.replace(slashRegex, '_')
-      const fileName = `${escapedAlbumName} - ${escapedTitleName}.mp3`;
+      let fileName = `${escapedAlbumName} - ${escapedTitleName}.mp3`;
+
+      // Check for file name conflicts in the zip
+      let counter = 1;
+      while (zip && zip.files[fileName]) {
+        fileName = `${escapedAlbumName} - ${escapedTitleName} [${counter}].mp3`;
+        counter++;
+      }
 
       zip ? zip.file(fileName, taggedBlob) : saveAs(taggedBlob, fileName);
     } catch (e) {
